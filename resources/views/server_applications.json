@@ -1,0 +1,21 @@
+{
+    "restURI": "http://localhost:8087/v2/servers/_defaultServer_/vhosts/_defaultVHost_/applications",
+    "applications": [
+        {
+            "id": "live",
+            "href": "http://localhost:8087/v2/servers/_defaultServer_/vhosts/_defaultVHost_/applications/live",
+            "appType": "Live",
+            "dvrEnabled": false,
+            "drmEnabled": false,
+            "transcoderEnabled": false
+        },
+        {
+            "id": "vod",
+            "href": "http://localhost:8087/v2/servers/_defaultServer_/vhosts/_defaultVHost_/applications/vod",
+            "appType": "VOD",
+            "dvrEnabled": false,
+            "drmEnabled": false,
+            "transcoderEnabled": false
+        }
+    ]
+}
