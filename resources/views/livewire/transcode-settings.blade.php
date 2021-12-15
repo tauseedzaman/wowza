@@ -18,7 +18,7 @@
             </div>
         </div>
         @if ($show_trans_settings)
-            <div class="card">
+            {{-- <div class="card">
                 <div class="card-header">
                     Edit Transcode Settings
                 </div>
@@ -97,11 +97,6 @@
                     </div>
                     <br>
 
-
-
-
-
-
                     <div class="form-group">
                         <label for="followSource">followSource</label>
                         <select id="followSource" wire:model.defer="followSource"
@@ -128,9 +123,29 @@
                             @enderror
                     </div>
                     <br>
+                    <div class="form-group">
+                        <label for="fitMode">fitMode</label>
+                       <input type="text" wire:model.defer="fitMode"
+                            class="form-control @error('fitMode') is-invalid @enderror"
+                            name="fitMode" id="fitMode" placeholder="fitMode">
+                        @error('fitMode')
+                            <span class="invalid-feedback" role="alert text-danger">
+                                <strong>{{ $message }}</strong>
+                            @enderror
+                    </div>
+                    <br>
 
-
-
+                    <div class="form-group">
+                        <label for="fitMode">fitMode</label>
+                       <input type="text" wire:model.defer="fitMode"
+                            class="form-control @error('fitMode') is-invalid @enderror"
+                            name="fitMode" id="fitMode" placeholder="fitMode">
+                        @error('fitMode')
+                            <span class="invalid-feedback" role="alert text-danger">
+                                <strong>{{ $message }}</strong>
+                            @enderror
+                    </div>
+                    <br>
                     <div class="form-group">
                         <label for="webrtc_iceCandidateIpAddresses">ice Candidate Ip Addresses</label>
                         <input class="form-control @error('webrtc_iceCandidateIpAddresses') is-invalid @enderror"
@@ -143,7 +158,6 @@
                             @enderror
                     </div>
                     <br>
-
 
                     <div class="form-group">
                         <label for="webrtc_preferredCodecsAudio">Preferred Codecs Audio</label>
@@ -169,14 +183,13 @@
                     </div>
                     <br>
 
-
                 </div>
                 <div class="card-footer">
                     <button class="btn btn-info btn-lg" wire:click="cancel()" type="button">Back</button>
                     <button class="btn btn-success btn-lg" wire:click="save_webrtc_settings()"
                         type="button">Save</button>
                 </div>
-            </div>
+            </div> --}}
         @else
             <div class="row">
                 <div class="col mb-2">
@@ -189,34 +202,19 @@
                     <table class="table table-light table-striped">
                         <thead class="thead-light">
                             <tr>
-                                <th>Properties Name</th>
-                                <th>Value</th>
+                                <th>Transcoders</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @for ($i = 0; $i < 4; $i++)
-                                @foreach ($transcode['encodes'][$i] as $key => $value)
-                                    @if ($key == 'audioCodec')
-                                        <thead>
-                                            <th>Inner Properties</th>
-                                            <th>Inner Value</th>
-                                        </thead>
-                                        @foreach ($transcode['encodes'][0]['Overlays'][0] as $key => $value)
-                                            <tr>
-                                                <td>{{ $key }}</td>
-                                                <td>{{ $value }}</td>
-                                            </tr>
-                                        @endforeach
-                                    @break
-                                @else
-                                    <tr>
-                                        <td>{{ $key }}</td>
-                                        <td>{{ $value }}</td>
-                                    </tr>
-                                @endif
+                                @foreach ($transcode['templates']['templates'] as $value)
+                                   <tr>
+                                       <td>
+                                           <a href="{{ route("server_application_single_transcoder",['app'=>$app,'transcoder' => $value['id'] ]) }} ">{{ $value['id'] }}</a>
+                                       </td>
+                                   </tr>
 
                             @endforeach
-                            <tr>
+                            {{-- <tr>
                                 <td></td>
                                 <td>
                                     <button class="btn btn-info btn-lg" wire:click="edit_this_transcode({{ $i }})" type="button">Edit </button>
@@ -226,7 +224,7 @@
                                 <th>-------------------------------------------------</th>
                                 <th>-------------------------------------------------</th>
                             </thead>
-        @endfor
+        @endfor --}}
         </tbody>
         </table>
     </div>

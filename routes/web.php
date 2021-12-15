@@ -6,6 +6,7 @@ use App\Http\Controllers\usersController;
 use App\Http\Livewire\Application;
 use App\Http\Livewire\Applications;
 use App\Http\Livewire\AppStatistics;
+use App\Http\Livewire\SingleTranscoder;
 use App\Http\Livewire\StreamFile;
 use App\Http\Livewire\StreamFileDetails;
 use App\Http\Livewire\StreamFiles;
@@ -89,6 +90,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('Applications/{app}', Application::class)->name("server_application");
     Route::get('Applications/{app}/Transcode-Settings', TranscodeSettings::class)->name("server_application_transcode_settings");
+    Route::get('Applications/{app}/Transcode-Settings/{transcoder}', SingleTranscoder::class)->name("server_application_single_transcoder");
     Route::get('Applications/{app}/Stream-Targets', StreamTargets::class)->name("server_streamTargets");
     Route::get('Applications/{app}/Stream-Targets/{stream}', StreamTarget::class)->name("server_stream");
     Route::get('Applications/{app}/Stream-Targets/{stream}/Detailed', StreamTargetDetails::class)->name("server_streamTargetDetailed");

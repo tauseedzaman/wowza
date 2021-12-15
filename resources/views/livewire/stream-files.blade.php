@@ -39,7 +39,9 @@
                                         <td><a style="text-decoration:none"
                                                 href="{{ route('server_streamFile', ['app' => $app, 'file' => $stream['id']]) }}">{{ $stream['id'] }}</a>
                                         </td>
-                                        <td><small ><a style="text-decoration:none" class="text-success" href="{{ env("WOWZA_HOST_FULL_URL").$stream['href'] }}">{{ env("WOWZA_HOST_URL").$stream['href'] }}</a></small></td>
+                                        <td><small><a style="text-decoration:none" class="text-success"
+                                                    href="{{ env('WOWZA_HOST_FULL_URL') . $stream['href'] }}">{{ env('WOWZA_HOST_URL') . $stream['href'] }}</a></small>
+                                        </td>
                                         <td>
                                             none
                                             {{-- <center>
@@ -63,9 +65,11 @@
                                                         wire:click="enable_this_stream('{{ $stream['entryName'] }}')"
                                                         class="btn btn-success" type="button">Enable</button>
                                                 @endif --}}
-                                                @if (App\Models\users_roles::where('user_id', auth()->id())->first()->role->name === 'Super Admin' || users_roles::where('user_id', auth()->id())->first()->role->name === 'Admin') <button wire:click="delete_server_stream_file('{{ $stream['id'] }}')"
-                                                    class="btn btn-danger" type="button">Remove</button>
-                                                    @else
+                                                @if (App\Models\users_roles::where('user_id', auth()->id())->first()->role->name === 'Super Admin' || users_roles::where('user_id', auth()->id())->first()->role->name === 'Admin')
+                                                    <button
+                                                        wire:click="delete_server_stream_file('{{ $stream['id'] }}')"
+                                                        class="btn btn-danger" type="button">Remove</button>
+                                                @else
                                                     ----
                                                 @endif
 

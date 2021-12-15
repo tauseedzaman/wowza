@@ -1,21 +1,14 @@
 <?php
 
 namespace App\Http\Livewire;
-
 use Illuminate\Support\Facades\Http;
 use Livewire\Component;
-
 class TranscodeSettings extends Component
 {
     public $app;
-
     public $show_trans_settings=false;
-
-
-
     public $show_webrtc_settings = false;
     public $show_transcoder_settings = false;
-
     public $data_for_webrtc_settings;
 
     public function transcoder()
@@ -25,15 +18,6 @@ class TranscodeSettings extends Component
 
     public function save_webrtc_settings()
     {
-        $this->validate([
-            '' => 'required',
-            '' => 'required',
-            '' => 'required',
-            '' => 'required',
-            '' => 'required|string',
-            '' => 'required|string',
-        ]);
-
         $response = Http::accept('application/json')->withHeaders([
             "Accept:application/json; charset=utf-8",
             'Content-Type:application/json; charset=utf-8',
@@ -49,9 +33,7 @@ class TranscodeSettings extends Component
         ]);
         session()->flash('message', $response->collect()['message']);
         //unset all the values
-
     }
-
 
     public function mount($app)
     {
@@ -72,18 +54,19 @@ class TranscodeSettings extends Component
         // ])->get(env("WOWZA_HOST_FULL_API_URL") . '/v2/servers/_defaultServer_/vhosts/_defaultVHost_/applications/live/transcoder/templates/transcode-h265')->collect();
 
         // transcode
-        $transcoder_transcode_response = Http::accept('application/json')->withHeaders([
-            "Accept:application/json; charset=utf-8",
-        ])->get(env("WOWZA_HOST_FULL_API_URL") . '/v2/servers/_defaultServer_/vhosts/_defaultVHost_/applications/live/transcoder/templates/transcode')->collect();
+        // $transcoder_transcode_response = Http::accept('application/json')->withHeaders([
+        //     "Accept:application/json; charset=utf-8",
+        // ])->get(env("WOWZA_HOST_FULL_API_URL") . '/v2/servers/_defaultServer_/vhosts/_defaultVHost_/applications/live/transcoder/templates/transcode')->collect();
 
         // transrate
-        // $transcoder_transrate_response = Http::accept('application/json')->withHeaders([
-        //     "Accept:application/json; charset=utf-8",
-        // ])->get(env("WOWZA_HOST_FULL_API_URL") . '/v2/servers/_defaultServer_/vhosts/_defaultVHost_/applications/live/transcoder/templates/transrate')->collect();
+        $response = Http::accept('application/json')->withHeaders([
+            "Accept:application/json; charset=utf-8",
+        ])->get(env("WOWZA_HOST_FULL_API_URL") . '/v2/servers/_defaultServer_/vhosts/_defaultVHost_/applications/live/transcoder')->collect();
 
+        // dd($response);
 
         return view('livewire.transcode-settings', [
-            'transcode' => $transcoder_transcode_response
+            'transcode' => $response
         ])->layout('layouts.livewire');
     }
 }
