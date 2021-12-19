@@ -12,6 +12,9 @@ class StreamFile extends Component
     public $url;
     public $edited_url;
     public $show_edit_streamFile_form = false;
+    public $show_connect_form = false;
+
+    public $media_caster_type;
 
 
 
@@ -20,15 +23,16 @@ class StreamFile extends Component
     //edit
     public function edit()
     {
-            $this->show_edit_streamFile_form();
+            $this->show_edit_streamFile_form(true,false);
             $this->edited_url = $this->url;
             $this->is_editing = true;
     }
 
     //show hide form
-    public function show_edit_streamFile_form()
+    public function show_edit_streamFile_form($x, $y)
     {
-        $this->show_edit_streamFile_form = !$this->show_edit_streamFile_form;
+        $this->show_edit_streamFile_form = $x;
+        $this->show_connect_form = $y;
     }
 
     public function update()
@@ -50,16 +54,16 @@ class StreamFile extends Component
             "uri" => $url,
         ]);
 
-        if ($response->successful()) {
-            $this->show_edit_streamFile_form();
-            session()->flash('message', 'Stream URL Updated Successfully.');
-            unset($this->name);
-            unset($this->url);
-            $this->is_editing = false;
-        } else {
-            $this->show_edit_streamFile_form();
-            session()->flash('message', 'Whoops: Something Went Wrong.');
-        }
+        $this->show_edit_streamFile_form(false,false);
+
+            if ($response->successful()) {
+                session()->flash('message', "Updated Successfully..");
+            }else{
+                session()->flash('message', "Some thing went wrong...");
+            }
+        unset($this->name);
+        unset($this->url);
+        $this->is_editing = false;
     }
 
 
@@ -70,14 +74,17 @@ class StreamFile extends Component
         $response = Http::accept('application/json')->withHeaders([
             "Accept:application/json; charset=utf-8",
             'Content-Type:application/json; charset=utf-8',
-        ])->post(env("WOWZA_HOST_FULL_API_URL") . '/v2/servers/_defaultServer_/vhosts/_defaultVHost_/applications/' . $this->app . '/streamfiles/' . $this->file . '/actions/connect?connectAppName=/' . $this->app . '&appInstance=_definst_&mediaCasterType=rtp');
-            dd($response->collect());
-        if ($response->successful()) {
-            session()->flash('message', '' . $this->file . ' Connected Successfully.');
-        } else {
-            session()->flash('message', 'Whoops! Something Went Wrong.');
-        }
+        ])->put(env("WOWZA_HOST_FULL_API_URL") . '/v2/servers/_defaultServer_/vhosts/_defaultVHost_/applications/' . $this->app . '/streamfiles/' . $this->file . '/actions/connect?connectAppName='.$this->app.'&appInstance=_definst_&mediaCasterType='.$this->media_caster_type);
+
+        $this->show_edit_streamFile_form(false,false);
+            session()->flash('message', '' . $response['message']);
     }
+
+    public function show_connect_form()
+    {
+        $this->show_edit_streamFile_form(false,true);
+    }
+
 
     // disconnect
     public function disconnect()
@@ -87,11 +94,7 @@ class StreamFile extends Component
             'Content-Type:application/json; charset=utf-8',
         ])->post(env("WOWZA_HOST_FULL_API_URL") . '/v2/servers/_defaultServer_/vhosts/_defaultVHost_/applications/' . $this->app . '/instances=_definst_/incomingstreams/' . $this->file . '.stream/actions/disconnectStream');
 
-        if ($response->successful()) {
-            session()->flash('message', '' . $this->file . ' Disconnected Successfully.');
-        } else {
-            session()->flash('message', 'Whoops! Something Went Wrong.');
-        }
+            session()->flash('message', '' . $response['message']);
     }
 
     public function mount($app, $file)
@@ -104,9 +107,9 @@ class StreamFile extends Component
     {
         $response = Http::accept('application/json')->withHeaders([
             "Accept:application/json; charset=utf-8",
-        ])->get(env("WOWZA_HOST_FULL_API_URL") . '/v2/servers/_defaultServer_/vhosts/_defaultVHost_/applications/' . $this->app . '/streamfiles/' . $this->file.'/adv')->collect();
-            // $this->url = $response["uri"];
-        dd($response);
+        ])->get(env("WOWZA_HOST_FULL_API_URL") . '/v2/servers/_defaultServer_/vhosts/_defaultVHost_/applications/' . $this->app . '/streamfiles/' . $this->file)->collect();
+        // dd($response);
+            $this->url = $response["uri"];
         return view('livewire.stream-file', [
             'details' => $response,
         ])->layout('layouts.livewire');

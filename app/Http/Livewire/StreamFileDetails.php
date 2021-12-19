@@ -19,7 +19,7 @@ class StreamFileDetails extends Component
     {
         $response = Http::accept('application/json')->withHeaders([
             "Accept:application/json; charset=utf-8",
-        ])->get(env("WOWZA_HOST_URL") . ':8087/v2/servers/_defaultServer_/vhosts/_defaultVHost_/applications/' . $this->app . '/streamfiles/' . $this->file . '/adv')->collect();
+        ])->get(env("WOWZA_HOST_FULL_API_URL") . '/v2/servers/_defaultServer_/vhosts/_defaultVHost_/applications/' . $this->app . '/streamfiles/' . $this->file . '/adv')->collect();
 
         return view('livewire.stream-file-details', [
             'details' => $response['advancedSettings']

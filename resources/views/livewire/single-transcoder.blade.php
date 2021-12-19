@@ -27,82 +27,13 @@
             </div>
         </div>
         @if ($Encoding_Presets)
-        <div class="row">
-            <div class="col">
-                <table class="table table-light">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th>Enabled</th>
-                            <th>Preset</th>
-                            <th>Stream Name</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>{{ $data['encodes'][0]['enable'] }}</td>
-                            <td>{{ $data['encodes'][0]['audioCodec'] }}</td>
-                            <td>{{ $data['encodes'][0]['streamName'] }}</td>
-                            <td>
-                                <button class="btn btn-info" type="button" wire:click='edit'>Edit</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                    </tfoot>
-                </table>
-            </div>
-        </div>
+
+        @livewire('transcoder.encoding-presets',['app'=>$app, 'transcoder'=> $transcoder, 'data'=>$data['encodes']])
+
         @elseif ($Decoding_Presets)
-        <div class="row">
-            <div class="col">
-                <h4>Description</h4>
-                <p>something</p>
-
-                <h4>Decoder Implementation</h4>
-                <p>something</p>
-
-
-                <h4>Source Options</h4>
-                <p>something</p>
-
-
-                <hr>
-
-                <h4>Overlay Images</h4>
-                <p>some imags here</p>
-            </div>
-        </div>
+            @livewire('transcoder.decoding-presets',['app'=>$app, 'transcoder'=> $transcoder, 'data'=>$data['encodes']])
         @elseif ($Stream_Name_Groups)
-        <div class="row">
-            <div class="col">
-                <h2>Stream Name Groups</h2>
-                <button class="btn btn-info" type="button" >Add Stream Name Groups</button>
-            </div>
-            <div class="col">
-                <table class="table table-light">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th>Name</th>
-                            <th>Streem Name</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Name</td>
-                            <td>Streem Name</td>
-                            <td>
-                                <div class="btn-group" role="group" aria-label="Button group">
-                                    <button class="btn btn-primary" type="button">Edit</button>
-                                    <button class="btn btn-danger" type="button">Delete</button>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-
-                </table>
-            </div>
-        </div>
+        @livewire('transcoder.stream-name-groups',['app'=>$app, 'transcoder'=> $transcoder, 'data'=>$data['encodes']])
         @endif
     </div>
 

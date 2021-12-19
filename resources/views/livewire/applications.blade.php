@@ -100,7 +100,9 @@
                                     class="form-control @error('appType') is-invalid @enderror" name="appType">
                                     <option value="Live">Live</option>
                                     <option value="VOD">VOD</option>
-                                    <option value=".....">.....</option>
+                                    <option value="LiveEdge">LiveEdge</option>
+                                    <option value="VODEdge">LiveHTTPOrigin</option>
+                                    <option value="VODEdge">VODHTTPOrigin</option>
                                 </select>
                                 @error('appType')
                                     <span class="invalid-feedback" role="alert text-danger">
@@ -121,7 +123,11 @@
                                 <select id="role" wire:model.defer="streamType" class="form-control"
                                     name="streamType">
                                     <option value="live">live</option>
-                                    <option value="...">...</option>
+                                    <option value="VOD">VOD</option>
+                                    <option value="LiveEdge">LiveEdge</option>
+                                    <option value="VODEdge">LiveHTTPOrigin</option>
+                                    <option value="VODEdge">VODHTTPOrigin</option>
+
                                 </select>
                                 @error('streamType')
                                     <span class="invalid-feedback" role="alert text-danger">
