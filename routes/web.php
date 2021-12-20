@@ -1,26 +1,30 @@
 <?php
 
-use App\Http\Controllers\applicationController;
-use App\Http\Controllers\streamsController;
-use App\Http\Controllers\usersController;
-use App\Http\Livewire\Application;
-use App\Http\Livewire\Applications;
-use App\Http\Livewire\AppStatistics;
-use App\Http\Livewire\SingleTranscoder;
-use App\Http\Livewire\StreamFile;
-use App\Http\Livewire\StreamFileDetails;
-use App\Http\Livewire\StreamFiles;
-use App\Http\Livewire\StreamStatistics;
-use App\Http\Livewire\StreamTarget;
-use App\Http\Livewire\StreamTargetDetails;
-use App\Http\Livewire\StreamTargets;
-use App\Http\Livewire\TranscodeSettings;
-use App\Http\Livewire\Users;
+use App\Http\Controllers\{
+    applicationController,
+    streamsController,
+    usersController,
+};
+use App\Http\Livewire\{
+        Application,
+        Applications,
+        AppStatistics,
+        SingleTranscoder,
+        StreamFile,
+        StreamFileDetails,
+        StreamFiles,
+        StreamStatistics,
+        StreamTarget,
+        StreamTargetDetails,
+        StreamTargets,
+        TranscodeSettings,
+        Users,
+};
 use App\Models\users_roles;
-use Illuminate\Routing\RouteGroup;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 
+Auth::routes();
 
 // get all server users
 Route::get('/test', function () {
@@ -31,43 +35,11 @@ Route::get('/test', function () {
     ])->get("http://localhost:8087/v2/servers/_defaultServer_");
     dd($response->collect());
     // dd(App\Models\users_roles::find(auth()->id())->role->name === "Super Admin"); //
-
-    //get list of users
-    // $response = Http::accept('application/json')->withHeaders([
-    //     "Accept:application/json; charset=utf-8",
-    //     'Content-Type:application/json; charset=utf-8',
-    // ])->get('http://localhost:8087/v2/servers/_defaultServer_/users');
-
-    // app server user api call
-    // $response = Http::accept('application/json')->withHeaders([
-    //     "Accept:application/json; charset=utf-8",
-    //     'Content-Type:application/json; charset=utf-8',
-    // ])->post('http://'.env('WOWZA_HOST_URL').':8087/v2/servers/_defaultServer_/users', [
-    //     "userName" => "test",
-    //     "password" => "test",
-    //     "groups" => [
-    //         "admin"
-    //     ],
-    //     "passwordEncoding" => "bcrypt"
-    // ]);
-    // ])->get('http://139.162.34.167:8087/v2/servers/_defaultServer_/users');
-
     //get list of applications
     $response = Http::accept('application/json')->withHeaders([
         "Accept:application/json; charset=utf-8",
     ])->get('http://127.0.0.1:8000/json');
     dd($response->body());
-    // dd($response->json());
-    // dd($response->object());
-    // dd($response->collect()->last());
-    // dd($response->status());
-    // dd($response->ok());
-    // dd($response->successful());
-    // dd($response->failed());
-    // dd($response->serverError());
-    // dd($response->clientError());
-    // dd($response->header($header));
-    // dd($response->headers());
 });
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -76,7 +48,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('Users', Users::class)->name("server_users");
 });
 
-Route::redirect('register', 'login', 301);
+// Route::redirect('login', 'register', 301);
 
 Route::middleware(['auth'])->group(function () {
     Route::get('users', function () {
@@ -103,4 +75,3 @@ Route::middleware(['auth'])->group(function () {
 
 });
 
-Auth::routes();

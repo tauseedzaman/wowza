@@ -39,17 +39,17 @@ class EncodingPresets extends Component
                 ])->post(env('WOWZA_HOST_FULL_API_URL').'/v2/servers/_defaultServer_/vhosts/_defaultVHost_/applications/'.$this->app.'/transcoder/templates/audioonly',[
                     "name" => "aac",
                     "enable" => true,
-                    "streamName" => "mp4:${SourceStreamName}_aac"
-                    "videoCodec" => "PassThru"
-                    "gpuid" => 0
-                    "videoBitrate" => "${SourceVideoBitrate}"
-                    "followSource" => false
-                    "interval" => 0
-                    "width" => 0
-                    "height" => 0
-                    "audioCodec" => "AAC"
-                    "audioBitrate" => "48000"
-                    "Overlays" => []
+                    "streamName" => "mp4:\${SourceStreamName}_aac",
+                    "videoCodec" => "PassThru",
+                    "gpuid" => 0,
+                    "videoBitrate" => "\${SourceVideoBitrate}",
+                    "followSource" => false,
+                    "interval" => 0,
+                    "width" => 0,
+                    "height" => 0,
+                    "audioCodec" => "AAC",
+                    "audioBitrate" => "48000",
+                    "Overlays" => [],
                 ]);
 
         dd($response->collect());
