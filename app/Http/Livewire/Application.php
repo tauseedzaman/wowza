@@ -158,7 +158,7 @@ class Application extends Component
         $response = Http::accept('application/json')->withHeaders([
             "Accept:application/json; charset=utf-8",
         ])->get(env("WOWZA_HOST_FULL_API_URL") . '/v2/servers/_defaultServer_/vhosts/_defaultVHost_/applications/' . $this->app)->collect();
-        // dd($response['transcoderConfig']);
+        // dd($response);
         $this->data_for_webrtc_settings=$response['webRTCConfig'];
         return view('livewire.application', [
             'details' => $response

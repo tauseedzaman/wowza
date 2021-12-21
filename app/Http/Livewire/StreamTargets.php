@@ -57,7 +57,7 @@ class StreamTargets extends Component
         return Http::accept('application/json')->withHeaders([
             "Accept:application/json; charset=utf-8",
             'Content-Type:application/json; charset=utf-8',
-        ])->post(env("WOWZA_HOST_URL") . ':8087/v2/servers/_defaultServer_/vhosts/_defaultVHost_/applications/' . $this->app . '/pushpublish/mapentries/' . $this->entryName, [
+        ])->post(env("WOWZA_HOST_FULL_API_URL") . '/v2/servers/_defaultServer_/vhosts/_defaultVHost_/applications/' . $this->app . '/pushpublish/mapentries/' . $this->entryName, [
             "serverName" => "_defaultServer_",
             "sourceStreamName" => $sourceStreamName,
             "entryName" => $entryName,
@@ -77,7 +77,7 @@ class StreamTargets extends Component
         //get form data
         $response = Http::accept('application/json')->withHeaders([
             "Accept:application/json; charset=utf-8",
-        ])->get(env("WOWZA_HOST_URL") . ':8087/v2/servers/_defaultServer_/vhosts/_defaultVHost_/applications/' . $this->app . '/pushpublish/mapentries/' . $name);
+        ])->get(env("WOWZA_HOST_FULL_API_URL") . '/v2/servers/_defaultServer_/vhosts/_defaultVHost_/applications/' . $this->app . '/pushpublish/mapentries/' . $name);
 
         //now set those valuse to our variables
         $data = $response->collect();
@@ -112,7 +112,7 @@ class StreamTargets extends Component
         $response = Http::accept('application/json')->withHeaders([
             "Accept:application/json; charset=utf-8",
             'Content-Type:application/json; charset=utf-8',
-        ])->put(env("WOWZA_HOST_URL") . ':8087/v2/servers/_defaultServer_/vhosts/_defaultVHost_/applications/' . $this->app . '/pushpublish/mapentries/' . $this->entryName, [
+        ])->put(env("WOWZA_HOST_FULL_API_URL") . '/v2/servers/_defaultServer_/vhosts/_defaultVHost_/applications/' . $this->app . '/pushpublish/mapentries/' . $this->entryName, [
             "sourceStreamName" => $this->sourceStreamName,
             "entryName" => $this->entryName,
             "profile" => $this->profile,
@@ -145,7 +145,7 @@ class StreamTargets extends Component
         $response = Http::accept('application/json')->withHeaders([
             "Accept:application/json; charset=utf-8",
             'Content-Type:application/json; charset=utf-8',
-        ])->delete(env('WOWZA_HOST_URL') . ':8087/v2/servers/_defaultServer_/vhosts/_defaultVHost_/applications/' . $this->app . '/pushpublish/mapentries/'.$name);
+        ])->delete(env('WOWZA_HOST_FULL_API_URL') . '/v2/servers/_defaultServer_/vhosts/_defaultVHost_/applications/' . $this->app . '/pushpublish/mapentries/'.$name);
         if ($response->successful()) {
             session()->flash('message', $response->collect()['message']);
         } else {
@@ -161,7 +161,7 @@ class StreamTargets extends Component
     public function mount($app)
     {
         $this->app = $app;
-        $this->Enable_Stream_Target();
+        $this->Enable_Stream_Targets();
         $this->Start_App();
 
 
@@ -172,10 +172,10 @@ class StreamTargets extends Component
         $response = Http::accept('application/json')->withHeaders([
             "Accept:application/json; charset=utf-8",
             'Content-Type:application/json; charset=utf-8',
-        ])->put(env("WOWZA_HOST_URL") . ':8087/v2/servers/_defaultServer_/vhosts/_defaultVHost_/applications/' . $this->app . '/adv', [
+        ])->put(env("WOWZA_HOST_FULL_API_URL") . '/v2/servers/_defaultServer_/vhosts/_defaultVHost_/applications/' . $this->app . '/adv', [
             "enablePushPublish" => "true"
         ]);
-        dd($response->json());
+        // dd($response->json());
         /*  [
             // "serverName": "_defaultServer_",
             "advancedSettings"=> [
@@ -233,7 +233,7 @@ class StreamTargets extends Component
         $response = Http::accept('application/json')->withHeaders([
             "Accept:application/json; charset=utf-8",
             'Content-Type:application/json; charset=utf-8',
-        ])->put(env("WOWZA_HOST_URL") . ':8087/v2/servers/_defaultServer_/vhosts/_defaultVHost_/applications/' . $this->app . '/actions/shutdown');
+        ])->put(env("WOWZA_HOST_FULL_API_URL") . '/v2/servers/_defaultServer_/vhosts/_defaultVHost_/applications/' . $this->app . '/actions/shutdown');
         if ($response->successful()) {
             session()->flash('message', $response->collect()['message']);
         } else {
@@ -247,7 +247,7 @@ class StreamTargets extends Component
         $response = Http::accept('application/json')->withHeaders([
             "Accept:application/json; charset=utf-8",
             'Content-Type:application/json; charset=utf-8',
-        ])->put(env("WOWZA_HOST_URL") . ':8087/v2/servers/_defaultServer_/vhosts/_defaultVHost_/applications/' . $this->app . '/actions/start');
+        ])->put(env("WOWZA_HOST_FULL_API_URL") . '/v2/servers/_defaultServer_/vhosts/_defaultVHost_/applications/' . $this->app . '/actions/start');
             session()->flash('message', $response->collect()['message']);
     }
 
@@ -257,7 +257,7 @@ class StreamTargets extends Component
         $response = Http::accept('application/json')->withHeaders([
             "Accept:application/json; charset=utf-8",
             'Content-Type:application/json; charset=utf-8',
-        ])->put(env("WOWZA_HOST_URL") . ':8087/v2/servers/_defaultServer_/vhosts/_defaultVHost_/applications/' . $this->app . '/actions/shutdown');
+        ])->put(env("WOWZA_HOST_FULL_API_URL") . '/v2/servers/_defaultServer_/vhosts/_defaultVHost_/applications/' . $this->app . '/actions/shutdown');
         session()->flash('message', $response->collect()['message']);
 
     }
@@ -267,7 +267,7 @@ class StreamTargets extends Component
         $response =  Http::accept('application/json')->withHeaders([
                     "Accept:application/json; charset=utf-8",
                     'Content-Type:application/json; charset=utf-8',
-                ])->put(env("WOWZA_HOST_URL") . ':8087/v2/servers/_defaultServer_/vhosts/_defaultVHost_/applications/' . $this->app . '/pushpublish/mapentries/'.$name.'/actions/enable');
+                ])->put(env("WOWZA_HOST_FULL_API_URL") . '/v2/servers/_defaultServer_/vhosts/_defaultVHost_/applications/' . $this->app . '/pushpublish/mapentries/'.$name.'/actions/enable');
                 session()->flash('message', $response->collect()['message']);
     }
 
@@ -276,7 +276,7 @@ class StreamTargets extends Component
         $response =  Http::accept('application/json')->withHeaders([
             "Accept:application/json; charset=utf-8",
             'Content-Type:application/json; charset=utf-8',
-        ])->put(env("WOWZA_HOST_URL") . ':8087/v2/servers/_defaultServer_/vhosts/_defaultVHost_/applications/' . $this->app . '/pushpublish/mapentries/'.$name.'/actions/disable');
+        ])->put(env("WOWZA_HOST_FULL_API_URL") . '/v2/servers/_defaultServer_/vhosts/_defaultVHost_/applications/' . $this->app . '/pushpublish/mapentries/'.$name.'/actions/disable');
         session()->flash('message', $response->collect()['message']);
     }
 
@@ -285,7 +285,7 @@ class StreamTargets extends Component
         //get all applications stream targets
         $response = Http::accept('application/json')->withHeaders([
             "Accept:application/json; charset=utf-8",
-        ])->get(env("WOWZA_HOST_URL") . ':8087/v2/servers/_defaultServer_/vhosts/_defaultVHost_/applications/' . $this->app . '/pushpublish/mapentries');
+        ])->get(env("WOWZA_HOST_FULL_API_URL") . '/v2/servers/_defaultServer_/vhosts/_defaultVHost_/applications/' . $this->app . '/pushpublish/mapentries');
 
         return view('livewire.stream-targets', [
             'streamsTargets' => $response->collect()['mapEntries']

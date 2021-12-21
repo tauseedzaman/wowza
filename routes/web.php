@@ -28,18 +28,13 @@ Auth::routes();
 
 // get all server users
 Route::get('/test', function () {
-    // withBasicAuth('tauseedzaman', 'tauseedzaman')->
-    $response = Http::accept('application/json')->withHeaders([
-        "Accept:application/json; charset=utf-8",
-        'Content-Type:application/json; charset=utf-8',
-    ])->get("http://localhost:8087/v2/servers/_defaultServer_");
-    dd($response->collect());
-    // dd(App\Models\users_roles::find(auth()->id())->role->name === "Super Admin"); //
-    //get list of applications
-    $response = Http::accept('application/json')->withHeaders([
-        "Accept:application/json; charset=utf-8",
-    ])->get('http://127.0.0.1:8000/json');
-    dd($response->body());
+    $x = App\Models\streamTargetSchedule::create([
+         'stream'=> "testStream",
+         "start_time" => "2021-12-21 10:37:38",
+         "end_time"=> "2021-12-21 10:40:38"
+    ]);
+    dd($x->start_time->format("m/d/Y H:i:s"));
+
 });
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -48,7 +43,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('Users', Users::class)->name("server_users");
 });
 
-// Route::redirect('login', 'register', 301);
+Route::redirect('register', 'login', 301);
 
 Route::middleware(['auth'])->group(function () {
     Route::get('users', function () {

@@ -73,14 +73,14 @@ class Applications extends Component
 
     public function render()
     {
-        try {
+        // try {
             $response = Http::accept('application/json')->withHeaders([
                 "Accept:application/json; charset=utf-8",
             ])->get(env("WOWZA_HOST_FULL_API_URL") .'/v2/servers/_defaultServer_/vhosts/_defaultVHost_/applications');
-        } catch (\Throwable $th) {
-            session()->flash('message', $response->collect()['message']);
+        // } catch (\Throwable $th) {
+            // session()->flash('message', $response->collect()['message']);
 
-        }
+        // }
 
         // dd($response->collect());
         return view('livewire.applications', [
