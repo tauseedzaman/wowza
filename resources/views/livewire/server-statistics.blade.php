@@ -6,11 +6,6 @@
         <div class="row shadow rounded bg-light p-3">
             <div class="col-12  shadow border rounded border-info p-2">
                 <h2 class="text-center text-dark">Up Time: <b class="text-success">02:50:30</b> </h2>
-                {{-- <div class="progress shadow">
-                    <div class="progress-bar  bg-success progress-bar-striped progress-bar-animated"
-                        role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 50%"><b>50</b></div>
-                </div> --}}
-                {{-- <br> --}}
             </div>
             <div class="col-md-6 shadow border rounded border-success p-2">
                 <h4>Bytes In</h4>

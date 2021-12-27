@@ -44,6 +44,8 @@ class Users extends Component
             $this->thisrole[] = "basic";
         }
 
+
+
         $response = $this->add_wowza_server_user($this->userName, $this->password, $this->thisrole);
 
         if ($response->successful()) {
@@ -52,20 +54,21 @@ class Users extends Component
                 'username' => $this->userName,
                 'password' => bcrypt($this->password),
             ]);
+
             users_roles::create([
                 'user_id' => $user->id,
                 'role_id' => $this->role,
             ]);
 
             $this->show_add_user_form();
-            session()->flash('message', 'User Created Successfully.');
-            unset($this->userName);
-            unset($this->password);
-            unset($this->thisrole);
-            unset($this->password_confirmation);
+            session()->flash('message', 'User added successfully!.');
+            $this->userName = "";
+            $this->password = "";
+            $this->thisrole = "";
+            $this->password_confirmation = "";
         } else {
             $this->show_add_user_form();
-            session()->flash('message', 'Woops: Somethign Went Wrong!.');
+            session()->flash('message', 'Woops! Somethign Went Wrong!.');
         }
     }
 
@@ -74,7 +77,7 @@ class Users extends Component
         return Http::accept('application/json')->withHeaders([
             "Accept:application/json; charset=utf-8",
             'Content-Type:application/json; charset=utf-8',
-        ])->post(env("WOWZA_HOST_URL") . ':8087/v2/servers/_defaultServer_/users', [
+        ])->post(env("WOWZA_HOST_FULL_API_URL") . '/v2/servers/_defaultServer_/users', [
             "userName" => $userName,
             "password" => $password,
             "groups" => $thisrole,
@@ -87,7 +90,7 @@ class Users extends Component
         $response = Http::accept('application/json')->withHeaders([
             "Accept:application/json; charset=utf-8",
             'Content-Type:application/json; charset=utf-8',
-        ])->delete(env("WOWZA_HOST_URL") . ':8087/v2/servers/_defaultServer_/users/' . $name);
+        ])->delete(env("WOWZA_HOST_FULL_API_URL") . '/v2/servers/_defaultServer_/users/' . $name);
         if ($response->successful()) {
             $user = User::where('username', $this->userName)->first();
             if ($user) {
@@ -113,7 +116,7 @@ class Users extends Component
         $response = Http::accept('application/json')->withHeaders([
             "Accept:application/json; charset=utf-8",
             'Content-Type:application/json; charset=utf-8',
-        ])->get(env("WOWZA_HOST_URL") . ':8087/v2/servers/_defaultServer_/users');
+        ])->get(env("WOWZA_HOST_FULL_API_URL") . '/v2/servers/_defaultServer_/users');
 
         return view('livewire.users', [
             'users' => $response->collect(),

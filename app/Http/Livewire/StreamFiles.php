@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use Illuminate\Support\Facades\Http;
 use Livewire\Component;
 
+    */
 class StreamFiles extends Component
 {
     public $show_add_streamFiles_form = false;
@@ -33,8 +34,8 @@ class StreamFiles extends Component
         if ($response->successful()) {
             $this->show_add_streamFiles_form();
             session()->flash('message', 'Stream File Created Successfully.');
-            unset($this->name);
-            unset($this->url);
+            $this->name = '';
+            $this->url = '';
         } else {
             $this->show_add_streamFiles_form();
             session()->flash('message', 'Whoops! Something Went Wrong.');
@@ -73,10 +74,10 @@ class StreamFiles extends Component
     public function enable_this_stream($name)
     {
         $response =  Http::accept('application/json')->withHeaders([
-                    "Accept:application/json; charset=utf-8",
-                    'Content-Type:application/json; charset=utf-8',
-                ])->put(env("WOWZA_HOST_FULL_API_URL") . '/v2/servers/_defaultServer_/vhosts/_defaultVHost_/applications/' . $this->app . '/streamfiles/'.$name.'/actions/enable');
-                session()->flash('message', $response->collect()['message']);
+            "Accept:application/json; charset=utf-8",
+            'Content-Type:application/json; charset=utf-8',
+        ])->put(env("WOWZA_HOST_FULL_API_URL") . '/v2/servers/_defaultServer_/vhosts/_defaultVHost_/applications/' . $this->app . '/streamfiles/' . $name . '/actions/enable');
+        session()->flash('message', $response->collect()['message']);
     }
 
 
@@ -86,7 +87,7 @@ class StreamFiles extends Component
         $response =  Http::accept('application/json')->withHeaders([
             "Accept:application/json; charset=utf-8",
             'Content-Type:application/json; charset=utf-8',
-        ])->put(env("WOWZA_HOST_FULL_API_URL") . '/v2/servers/_defaultServer_/vhosts/_defaultVHost_/applications/' . $this->app . '/streamfiles/'.$name.'/actions/disable');
+        ])->put(env("WOWZA_HOST_FULL_API_URL") . '/v2/servers/_defaultServer_/vhosts/_defaultVHost_/applications/' . $this->app . '/streamfiles/' . $name . '/actions/disable');
         session()->flash('message', $response->collect()['message']);
     }
 
@@ -99,6 +100,7 @@ class StreamFiles extends Component
     {
         $this->app = $app;
     }
+
     public function render()
     {
         //get all applications stream files

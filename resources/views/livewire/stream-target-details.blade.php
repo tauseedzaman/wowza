@@ -1,13 +1,11 @@
 <main>
     <div class="container-fluid px-4">
         <h3 class="mt-4">Streams / {{ $stream }} / Details </h3>
-        <ol class="breadcrumb mb-4">
-            <li class="breadcrumb-item active"> {{ $stream }} Stream Target Details</li>
-        </ol>
+        <hr>
         <div class="row">
             <div class="col-12">
                 <a class="btn btn-primary btn-lg"
-                    href="{{ route('server_streamTargets', ['app' => $app, 'stream' => $stream]) }}">Go Back</a>
+                    href="{{ route('server_streamTargets', ['app' => $app, 'stream' => $stream]) }}">Back</a>
             </div>
             <br>
             <table class="table table-light table-striped">

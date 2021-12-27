@@ -6,19 +6,20 @@ use App\Http\Controllers\{
     usersController,
 };
 use App\Http\Livewire\{
-        Application,
-        Applications,
-        AppStatistics,
-        SingleTranscoder,
-        StreamFile,
-        StreamFileDetails,
-        StreamFiles,
-        StreamStatistics,
-        StreamTarget,
-        StreamTargetDetails,
-        StreamTargets,
-        TranscodeSettings,
-        Users,
+    Application,
+    Applications,
+    AppStatistics,
+    SingleTranscoder,
+    StreamFile,
+    StreamFileDetails,
+    StreamFiles,
+    StreamStatistics,
+    StreamTarget,
+    StreamTargetDetails,
+    StreamTargets,
+    TranscodeSettings,
+    UserProfile,
+    Users,
 };
 use App\Models\users_roles;
 use Illuminate\Support\Facades\Http;
@@ -28,12 +29,12 @@ Auth::routes();
 
 // get all server users
 Route::get('/test', function () {
-    $x = App\Models\streamTargetSchedule::create([
-         'stream'=> "testStream",
-         "start_time" => "2021-12-21 10:37:38",
-         "end_time"=> "2021-12-21 10:40:38"
-    ]);
-    dd($x->start_time->format("m/d/Y H:i:s"));
+    // $x = App\Models\streamTargetSchedule::create([
+    //      'stream'=> "testStream",
+    //      "start_time" => "2021-12-21 10:37:38",
+    //      "end_time"=> "2021-12-21 10:40:38"
+    // ]);
+    // dd($x->start_time->format("m/d/Y H:i:s"));
 
 });
 
@@ -47,13 +48,14 @@ Route::redirect('register', 'login', 301);
 
 Route::middleware(['auth'])->group(function () {
     Route::get('users', function () {
-        if(users_roles::where("user_id",auth()->id())->first()->role->name === "Super Admin" || users_roles::where("user_id",auth()->id())->first()->role->name === "Admin"){
+        if (users_roles::where("user_id", auth()->id())->first()->role->name === "Super Admin" || users_roles::where("user_id", auth()->id())->first()->role->name === "Admin") {
             dd(users_roles::find(auth()->id())->role);
-        }else{
+        } else {
             dd("NOT allowed");
         }
     });
     Route::get('Applications', Applications::class)->name("server_applications");
+    Route::get('My-Profile', UserProfile::class)->name("user_profile");
 
     Route::get('Applications/{app}', Application::class)->name("server_application");
     Route::get('Applications/{app}/Transcode-Settings', TranscodeSettings::class)->name("server_application_transcode_settings");
@@ -67,6 +69,4 @@ Route::middleware(['auth'])->group(function () {
     Route::get('Applications/{app}/Stream-Files/{file}/Detailed', StreamFileDetails::class)->name("server_streamFileDetailed");
 
     Route::get('Applications/{app}/statistics', AppStatistics::class)->name("server_app_statistics");
-
 });
-

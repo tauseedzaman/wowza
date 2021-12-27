@@ -98,11 +98,10 @@
                                 <label for="appType">Application Type</label>
                                 <select id="appType" wire:model.defer="appType"
                                     class="form-control @error('appType') is-invalid @enderror" name="appType">
-                                    <option value="Live">Live</option>
-                                    <option value="VOD">VOD</option>
+                                    <option value="Live" selected>Live</option>
+                                    {{-- <option value="VOD">VOD</option>
                                     <option value="LiveEdge">LiveEdge</option>
-                                    <option value="VODEdge">LiveHTTPOrigin</option>
-                                    <option value="VODEdge">VODHTTPOrigin</option>
+                                    <option value="LiveHTTPOrigin">LiveHTTPOrigin</option> --}}
                                 </select>
                                 @error('appType')
                                     <span class="invalid-feedback" role="alert text-danger">
@@ -122,11 +121,10 @@
                                 <label for="role">Stream Type</label>
                                 <select id="role" wire:model.defer="streamType" class="form-control"
                                     name="streamType">
-                                    <option value="live">live</option>
-                                    <option value="VOD">VOD</option>
-                                    <option value="LiveEdge">LiveEdge</option>
-                                    <option value="VODEdge">LiveHTTPOrigin</option>
-                                    <option value="VODEdge">VODHTTPOrigin</option>
+                                    <option value="live" selected>live</option>
+                                    {{-- <option value="VOD">VOD</option>
+                                    <option value="VODEdge">VODEdge</option>
+                                    <option value="VODHTTPOrigin">VODHTTPOrigin</option> --}}
 
                                 </select>
                                 @error('streamType')

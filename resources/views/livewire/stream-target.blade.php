@@ -6,10 +6,11 @@
         </ol>
         <div class="row">
             <div class="col-12 align-between">
-                <a href="{{ route('server_streamFiles', $app['id']) }}" class="btn btn-success" type="button">View Stream Files</a>
+                <a href="{{ route('server_streamFiles', $app['id']) }}" class="btn btn-success" type="button">View
+                    Stream Files</a>
 
-                <a href="{{ route('server_streamTargets', $app['id']) }}" class="btn btn-info"
-                    type="button">View Stream Targets</a>
+                <a href="{{ route('server_streamTargets', $app['id']) }}" class="btn btn-info" type="button">View
+                    Stream Targets</a>
             </div>
             <table class="table table-light table-striped">
                 <thead class="thead-light">
@@ -32,7 +33,7 @@
                         <td class="text-capitalize">{{ $details['version'] }}</td>
                     </tr>
                     <tr>
-                        <td class="text-capitalize">serverName</td>
+                        <td class="text-capitalize">server Name</td>
                         <td class="text-capitalize">{{ $details['serverName'] }}</td>
                     </tr>
                     <tr>
@@ -40,49 +41,47 @@
                         <td class="text-capitalize">{{ $details['appType'] }}</td>
                     </tr>
                     <tr>
-                        <td class="text-capitalize">applicationTimeout</td>
+                        <td class="text-capitalize">application Timeout</td>
                         <td class="text-capitalize">{{ $details['applicationTimeout'] }}</td>
                     </tr>
                     <tr>
-                        <td class="text-capitalize">pingTimeout</td>
+                        <td class="text-capitalize">ping Timeout</td>
                         <td class="text-capitalize">{{ $details['pingTimeout'] }}</td>
                     </tr>
                     <tr>
-                        <td class="text-capitalize">clientStreamReadAccess</td>
+                        <td class="text-capitalize">client Stream Read Access</td>
                         <td class="text-capitalize">{{ $details['clientStreamReadAccess'] }}</td>
                     </tr>
                     <tr>
-                        <td class="text-capitalize">avSyncMethod</td>
+                        <td class="text-capitalize">avSync Method</td>
                         <td class="text-capitalize">{{ $details['avSyncMethod'] }}</td>
                     </tr>
                     <tr>
-                        <td class="text-capitalize">maxRTCPWaitTime</td>
+                        <td class="text-capitalize">max RTCP Wait Time</td>
                         <td class="text-capitalize">{{ $details['maxRTCPWaitTime'] }}</td>
                     </tr>
                     <tr>
-                        <td class="text-capitalize">httpCORSHeadersEnabled</td>
+                        <td class="text-capitalize">http CORS Headers Enabled</td>
                         <td class="text-capitalize">{{ $details['httpCORSHeadersEnabled'] }}</td>
                     </tr>
                     <tr>
-                        <td class="text-capitalize">httpCORSHeadersEnabled</td>
-                        <td class="text-capitalize">{{ $details['httpCORSHeadersEnabled'] }}</td>
-                    </tr>
-                    <tr>
-                        <td class="text-capitalize">httpStreamers</td>
-                        <td class="text-capitalize">{{ $details['httpStreamers'][0] }}</td>
+                        <td class="text-capitalize">http Streamers</td>
+                        <td class="text-capitalize">{{ $details['httpStreamers'][0] }}...</td>
                         {{-- @foreach ($xx = $details['httpCORSHeadersEnabled'] as $x) {{ $x }} @endforeach --}}
                     </tr>
                     <tr>
-                        <td class="text-capitalize">mediaReaderRandomAccessReaderClass</td>
+                        <td class="text-capitalize">media Reader Random Access Reader Class</td>
                         <td class="text-capitalize">{{ $details['mediaReaderRandomAccessReaderClass'] }}</td>
                     </tr>
                     <tr>
-                        <td class="text-capitalize">httpOptimizeFileReads</td>
-                        <td class="text-capitalize">{{ $details['httpOptimizeFileReads'] == false ? 'No' : 'Yes' }}</td>
+                        <td class="text-capitalize">http Optimize File Reads</td>
+                        <td class="text-capitalize">{{ $details['httpOptimizeFileReads'] == false ? 'No' : 'Yes' }}
+                        </td>
                     </tr>
                     <tr>
-                        <td class="text-capitalize">mediaReaderBufferSeekIO</td>
-                        <td class="text-capitalize">{{ $details['mediaReaderBufferSeekIO'] == false ? 'No' : 'Yes' }}</td>
+                        <td class="text-capitalize">media Reader Buffer SeekIO</td>
+                        <td class="text-capitalize">{{ $details['mediaReaderBufferSeekIO'] == false ? 'No' : 'Yes' }}
+                        </td>
                     </tr>
                 </tbody>
             </table>

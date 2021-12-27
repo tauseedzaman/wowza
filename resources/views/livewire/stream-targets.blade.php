@@ -1,14 +1,15 @@
 <main>
     <div class="container-fluid px-4">
         <h1 class="mt-4">Applications / {{ $app }} / Stream Targets</h1>
-        <ol class="breadcrumb mb-4">
-            <li class="breadcrumb-item active">{{ $app }} Stream Targets</li>
-        </ol>
+        <hr>
         @if (!$show_add_streamTarget_form)
             <div class="row">
+                {{-- check if the auth user has the right to new this url --}}
                 @if (App\Models\users_roles::where('user_id', auth()->id())->first()->role->name === 'Super Admin' || users_roles::where('user_id', auth()->id())->first()->role->name === 'Admin' || users_roles::where('user_id', auth()->id())->first()->role->name === 'Manager')
                     <div class="col-12 mb-2">
-                        <button wire:click="show_add_streamTarget_form()" class="btn btn-success" type="button">Add
+                        <a class="btn btn-info" href="{{ route('server_application') }}">Back</a>
+                        <button wire:click="show_add_streamTarget_form()" class="btn btn-success ml-auto"
+                            type="button">Add
                             Stream Target</button>
                     </div>
                 @endif
@@ -32,7 +33,7 @@
                             <th>Profile</th>
                             <th>Status</th>
                             <th>host & port</th>
-                            <th>UserName & pass</th>
+                            <th>Username & pass</th>
                             <th>Stream Name</th>
                             <th>Actions</th>
                         </thead>

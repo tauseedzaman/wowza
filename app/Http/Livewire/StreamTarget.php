@@ -20,7 +20,7 @@ class StreamTarget extends Component
         $response = Http::accept('application/json')->withHeaders([
             "Accept:application/json; charset=utf-8",
         ])->get(env("WOWZA_HOST_FULL_API_URL") . '/v2/servers/_defaultServer_/vhosts/_defaultVHost_/applications/' . $this->app . '/pushpublish/mapentries/'.$this->stream)->collect();
-        dd($response);
+        // dd($response);
         return view('livewire.stream-target', [
             'details' => $response
         ])->layout('layouts.livewire');

@@ -28,10 +28,10 @@ class Applications extends Component
         if ($response->successful()) {
             $this->show_add_app_form();
             session()->flash('message', $response->collect()['message']);
-            unset($this->name);
-            unset($this->description);
-            unset($this->streamType);
-            unset($this->appType);
+            $this->name='';
+            $this->description='';
+            $this->streamType='';
+            $this->appType='';
         }else{
             $this->show_add_app_form();
             session()->flash('message', $response->collect()['message']);

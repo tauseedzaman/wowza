@@ -60,7 +60,6 @@ class Application extends Component
         $this->webrtc_preferredCodecsAudio = null;
         $this->webrtc_preferredCodecsVideo = null;
         $this->show_webrtc_settings = false;
-
     }
 
     public function cancel()
@@ -78,7 +77,7 @@ class Application extends Component
 
     public function show_webrtc_settings()
     {
-        $this->show_webrtc_settings =true;
+        $this->show_webrtc_settings = true;
         // set vlaues for the form
         $this->webrtc_enablePublish = $this->data_for_webrtc_settings['enablePublish'];
         $this->webrtc_enablePlay = $this->data_for_webrtc_settings['enablePlay'];
@@ -150,16 +149,11 @@ class Application extends Component
     }
     public function render()
     {
-        // $transcoder_audioonly_response = Http::accept('application/json')->withHeaders([
-        //     "Accept:application/json; charset=utf-8",
-        // ])->get(env("WOWZA_HOST_FULL_API_URL") . '/v2/servers/_defaultServer_/vhosts/_defaultVHost_/applications/live/transcoder/templates/audioonly')->collect();
-        // dd($response);
-        //
         $response = Http::accept('application/json')->withHeaders([
             "Accept:application/json; charset=utf-8",
         ])->get(env("WOWZA_HOST_FULL_API_URL") . '/v2/servers/_defaultServer_/vhosts/_defaultVHost_/applications/' . $this->app)->collect();
         // dd($response);
-        $this->data_for_webrtc_settings=$response['webRTCConfig'];
+        $this->data_for_webrtc_settings = $response['webRTCConfig'];
         return view('livewire.application', [
             'details' => $response
         ])->layout('layouts.livewire');

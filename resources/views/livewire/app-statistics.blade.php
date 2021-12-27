@@ -8,45 +8,45 @@
             <div class="col-12  shadow border rounded border-info p-2">
                 <h4>Up Time</h4>
                 <div class="progress shadow">
-                    <div class="progress-bar  bg-success progress-bar-striped progress-bar-animated"
-                        role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 50%"><b>50</b></div>
+                    <div class="progress-bar  bg-success progress-bar-striped progress-bar-animated" role="progressbar"
+                        aria-valuemin="0" aria-valuemax="100" style="width: 50%"><b>50</b></div>
                 </div>
                 <br>
             </div>
             <div class="col-md-6 shadow border rounded border-success p-2">
                 <h4>Bytes In</h4>
                 <div class="progress shadow">
-                    <div class="progress-bar  bg-dark progress-bar-striped progress-bar-animated"
-                        role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 70%"><b>70</b></div>
+                    <div class="progress-bar  bg-dark progress-bar-striped progress-bar-animated" role="progressbar"
+                        aria-valuemin="0" aria-valuemax="100" style="width: 70%"><b>70</b></div>
                 </div>
                 <br>
                 <h4>Bytes Out</h4>
                 <div class="progress shadow">
-                    <div class="progress-bar  bg-warning progress-bar-striped progress-bar-animated"
-                        role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 20%"><b>20</b></div>
+                    <div class="progress-bar  bg-warning progress-bar-striped progress-bar-animated" role="progressbar"
+                        aria-valuemin="0" aria-valuemax="100" style="width: 20%"><b>20</b></div>
                 </div>
                 <br>
             </div>
             <div class="col-md-6 shadow border rounded border-success p-2">
                 <h4>Bytes-In Rate</h4>
                 <div class="progress shadow">
-                    <div class="progress-bar  bg-dark progress-bar-striped progress-bar-animated"
-                    role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 10%"><b>10</b></div>
+                    <div class="progress-bar  bg-dark progress-bar-striped progress-bar-animated" role="progressbar"
+                        aria-valuemin="0" aria-valuemax="100" style="width: 10%"><b>10</b></div>
                 </div>
                 <br>
 
                 <h4>Bytes-Out Rate</h4>
                 <div class="progress shadow">
-                    <div class="progress-bar  bg-warning progress-bar-striped progress-bar-animated"
-                    role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 60%"><b>60</b></div>
+                    <div class="progress-bar  bg-warning progress-bar-striped progress-bar-animated" role="progressbar"
+                        aria-valuemin="0" aria-valuemax="100" style="width: 60%"><b>60</b></div>
                 </div>
                 <br>
             </div>
             <div class="col-12  shadow border rounded border-info p-2">
                 <h4>Total Connections</h4>
                 <div class="progress shadow">
-                    <div class="progress-bar  bg-success progress-bar-striped progress-bar-animated"
-                    role="progressbar" aria-valuemin="0" aria-valuemax="1000" style="width: 20%"><b>200</b></div>
+                    <div class="progress-bar  bg-success progress-bar-striped progress-bar-animated" role="progressbar"
+                        aria-valuemin="0" aria-valuemax="1000" style="width: 20%"><b>200</b></div>
                 </div>
                 <br>
             </div>
@@ -103,11 +103,11 @@
     </div>
 </main>
 "": {
-    "WEBM": 0,
-    "DVRCHUNKS": 0,
-    "RTMP": 0,
-    "MPEGDASH": 0,
-    "CUPERTINO": 0,
-    "SANJOSE": 0,
-    "SMOOTH": 0,
-    "RTP": 0
+"WEBM": 0,
+"DVRCHUNKS": 0,
+"RTMP": 0,
+"MPEGDASH": 0,
+"CUPERTINO": 0,
+"SANJOSE": 0,
+"SMOOTH": 0,
+"RTP": 0
