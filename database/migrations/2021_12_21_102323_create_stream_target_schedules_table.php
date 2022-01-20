@@ -18,6 +18,7 @@ class CreateStreamTargetSchedulesTable extends Migration
             $table->string("stream");
             $table->timestamp("start_time")->nullable();
             $table->timestamp("end_time")->nullable();
+            $table->string("status")->nullable();
             $table->timestamps();
         });
     }

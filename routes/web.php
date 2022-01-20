@@ -9,6 +9,7 @@ use App\Http\Livewire\{
     Application,
     Applications,
     AppStatistics,
+    ScheduleStreamTarget,
     SingleTranscoder,
     StreamFile,
     StreamFileDetails,
@@ -21,6 +22,7 @@ use App\Http\Livewire\{
     UserProfile,
     Users,
 };
+use App\Models\streamTargetSchedule;
 use App\Models\users_roles;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
@@ -29,12 +31,12 @@ Auth::routes();
 
 // get all server users
 Route::get('/test', function () {
-    // $x = App\Models\streamTargetSchedule::create([
-    //      'stream'=> "testStream",
-    //      "start_time" => "2021-12-21 10:37:38",
-    //      "end_time"=> "2021-12-21 10:40:38"
-    // ]);
-    // dd($x->start_time->format("m/d/Y H:i:s"));
+    $x = App\Models\streamTargetSchedule::create([
+         'stream'=> "testStream",
+         "start_time" => "2021-12-21 10:37:38",
+         "end_time"=> "2021-12-21 10:40:38"
+    ]);
+    dd($x->start_time->format("m/d/Y H:i:s"));
 
 });
 
@@ -63,6 +65,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('Applications/{app}/Stream-Targets', StreamTargets::class)->name("server_streamTargets");
     Route::get('Applications/{app}/Stream-Targets/{stream}', StreamTarget::class)->name("server_stream");
     Route::get('Applications/{app}/Stream-Targets/{stream}/Detailed', StreamTargetDetails::class)->name("server_streamTargetDetailed");
+    Route::get('Applications/{app}/Stream-Targets/{stream}/Schedule', ScheduleStreamTarget::class)->name("server_streamTarget_schedule");
 
     Route::get('Applications/{app}/Stream-Files', StreamFiles::class)->name("server_streamFiles");
     Route::get('Applications/{app}/Stream-Files/{file}', StreamFile::class)->name("server_streamFile");

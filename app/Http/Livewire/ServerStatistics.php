@@ -17,5 +17,5 @@ class ServerStatistics extends Component
         return view('livewire.server-statistics');
     }
 }
-/*http://localhost:8087/v2/servers/_defaultServer_/vhosts/_defaultVHost_/applications/live/instances/_definst_/incomingstreams/STREAMNAME/monitoring/current
-/*
+// /*http://localhost:8087/v2/servers/_defaultServer_/vhosts/_defaultVHost_/applications/live/instances/_definst_/incomingstreams/STREAMNAME/monitoring/current
+// /*
