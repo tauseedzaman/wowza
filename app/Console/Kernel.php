@@ -19,11 +19,17 @@ class Kernel extends ConsoleKernel
     {
         $this->input_data = streamTargetSchedule::latest()->first();
 
+        $schedule->call(function () {
+            echo "this is at ;)";
+
+        })->when(false);
+
         if ($this->input_data) {
             $schedule->call(function ()
             {
                     echo "starting success....\n\n";
                     // send api request to wowza for starting stream
+
             })->when(function (){
                 return \Carbon\Carbon::createFromFormat('m/d/Y H:i', $this->input_data->start_time->format('m/d/Y H:i'))->isPast();
             });

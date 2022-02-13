@@ -7,7 +7,7 @@
                 {{-- check if the auth user has the right to new this url --}}
                 @if (App\Models\users_roles::where('user_id', auth()->id())->first()->role->name === 'Super Admin' || users_roles::where('user_id', auth()->id())->first()->role->name === 'Admin' || users_roles::where('user_id', auth()->id())->first()->role->name === 'Manager')
                     <div class="col-12 mb-2">
-                        <a class="btn btn-info" href="{{ route('server_application') }}">Back</a>
+                        <a class="btn btn-info" href="{{ route('server_application',$app) }}">Back</a>
                         <button wire:click="show_add_streamTarget_form()" class="btn btn-success ml-auto"
                             type="button">Add
                             Stream Target</button>
@@ -49,12 +49,13 @@
                                         </td>
                                         <td>{{ $stream['profile'] }}</td>
                                         <td>{{ $stream['enabled'] == true ? 'Enabled' : 'Disabled' }}</td>
-                                        <td>{{ $stream['host'] . ':' . $stream['port'] }}</td>
+                                        <td>{{ $stream['host'] ?? "" . ':' . $stream['port'] ?? "" }}</td>
                                         <td>{{ $stream['userName'] . ':' . $stream['password'] }}</td>
                                         <td>{{ $stream['streamName'] }}</td>
                                         <td>
                                             @if (App\Models\users_roles::where('user_id', auth()->id())->first()->role->name === 'Super Admin' || users_roles::where('user_id', auth()->id())->first()->role->name === 'Admin' || users_roles::where('user_id', auth()->id())->first()->role->name === 'Manager')
                                                 <div class="btn-group" role="group" aria-label="Button group">
+                                                    <a href="{{ route('server_streamTarget_schedule',[ $app ,$stream['entryName']]) }}" class="btn btn-success">Schedule</a>
 
                                                     <button wire:click="edit('{{ $stream['entryName'] }}')"
                                                         class="btn btn-info" type="button">Edit</button>

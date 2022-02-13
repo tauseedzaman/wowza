@@ -82,7 +82,7 @@ class Applications extends Component
 
         // }
 
-        // dd($response->collect());
+        //  dd($response->collect());
         return view('livewire.applications', [
             'apps' => $response->collect() ? :[]
         ])->layout('layouts.livewire');
