@@ -22,12 +22,34 @@ use App\Http\Livewire\{
     UserProfile,
     Users,
 };
-use App\Models\streamTargetSchedule;
 use App\Models\users_roles;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 
+
+
+
+
+Route::get('/hi-mom',function ()
+{
+    return "hi mom";
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Auth::routes();
+
+
 
 // get all server users
 Route::get('/test', function () {
@@ -37,7 +59,6 @@ Route::get('/test', function () {
          "end_time"=> "2021-12-21 10:40:38"
     ]);
     dd($x->start_time->format("m/d/Y H:i:s"));
-
 });
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

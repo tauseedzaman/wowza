@@ -15,6 +15,7 @@ class CreateStreamTargetSchedulesTable extends Migration
     {
         Schema::create('stream_target_schedules', function (Blueprint $table) {
             $table->id();
+            $table->string("app");
             $table->string("stream");
             $table->timestamp("start_time")->nullable();
             $table->timestamp("end_time")->nullable();

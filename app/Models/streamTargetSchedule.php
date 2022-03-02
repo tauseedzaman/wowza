@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class streamTargetSchedule extends Model
 {
     use HasFactory;
-    protected $fillable=['stream','start_time','end_time','status'];
+    protected $fillable=['app','stream','start_time','end_time','status'];
+
     protected $casts = [
         'start_time' => 'datetime',
         'end_time' => 'datetime',

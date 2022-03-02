@@ -36,6 +36,7 @@
                         href="{{ route('server_applications', ['app' => $app ?? "test"]) }}">Back</a>
                         <button wire:click="toggle_form()" class="btn btn-info">Set Schedule</button>
                 </div>
+                {{-- <p>Now {{ now() }}</p> --}}
                 @if (session()->has('message'))
                     <div class="col-12 mt-2">
                         <div class="alert alert-info">
@@ -51,11 +52,9 @@
                 </div>
                 <div class="    mx-auto col my-3">
                     <h4 class="py-2 border-bottom ">Stream : <span class="ml-4 text-success px-3"> {{ $stream ?? "test" }}</span></h4>
-                    <h4 class="py-2 border-bottom ">Start Time : <span class="ml-4 text-success px-3"> {{ $schedule->start_time ?? "00:00:00" }} </span>
-                        {{-- {{ $schedule->start_time->diffForhumans() ?? "" }} --}}
+                    <h4 class="py-2 border-bottom ">Start Time : <span class="ml-4 text-success px-3"> {{ $schedule->start_time ?? "00:00   " }} </span>
                     </h4>
-                    <h4 class="py-2 border-bottom ">End Time : <span class="ml-4 text-success px-3"> {{ $schedule->end_time ?? "00:00:00" }} </span>
-                        {{-- {{ $schedule->end_time->diffForhumans() ?? "" }} --}}
+                    <h4 class="py-2 border-bottom ">End Time : <span class="ml-4 text-success px-3"> {{ $schedule->end_time ?? "00:00" }} </span>
                     </h4>
                     @if ($schedule)
 
