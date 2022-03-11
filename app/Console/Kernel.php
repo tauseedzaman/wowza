@@ -6,6 +6,7 @@ use App\Models\streamTargetSchedule;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class Kernel extends ConsoleKernel
 {
@@ -18,6 +19,11 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        $schedule->call(function () {
+
+            // your schedule code
+            Log::info('Working');
+        })->everyMinute();
 
         if (streamTargetSchedule::count()) {
             $streams = streamTargetSchedule::all();
@@ -27,6 +33,7 @@ class Kernel extends ConsoleKernel
                 $schedule->call(function () {
                     $this->enable_this_stream($this->stream->app, $this->stream->stream);
                     // echo "starting success....\n\n";
+                    Log::info('scheduler started the stream');
                 })->when(function () {
                     return \Carbon\Carbon::createFromFormat('m/d/Y H:i', $this->stream->start_time->format('m/d/Y H:i'))->isPast();
                 });
@@ -39,6 +46,7 @@ class Kernel extends ConsoleKernel
                     $this->disable_stream_target($this->stream->app, $this->stream->stream);
                     $this->stream->delete();
                     // echo "Stoped success....\n\n";
+                    Log::info('scheduler stoped the stream');
                 })->when(function () {
                     return \Carbon\Carbon::createFromFormat('m/d/Y H:i', $this->stream->start_time->format('m/d/Y H:i'))->isPast() && \Carbon\Carbon::createFromFormat('m/d/Y H:i', $this->stream->end_time->format('m/d/Y H:i'))->isPast();
                 });

@@ -37,7 +37,5 @@ class scheduleStreamTarget extends Command
      */
     public function handle()
     {
-        echo "this is at ;)";
-        return Command::SUCCESS;
     }
 }
